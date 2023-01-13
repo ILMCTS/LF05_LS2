@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 class Fahrkartenautomat {
+
+	public static boolean selectedAny = false;
+
 	public static void main(String[] args) {
 
 		Scanner tastatur = new Scanner(System.in);
@@ -13,6 +16,11 @@ class Fahrkartenautomat {
 
 		// Fahrschein Auswahl
 		zuZahlenderBetrag = fahrkartenbestellungErfassen(tastatur);
+
+		if (!selectedAny) {
+			System.out.println("Auswahl abgebrochen, bis zum nächsten mal!");
+			return;
+		}
 
 		// Geldeinwurf
 		eingezahlterGesamtbetrag = fahrkartenBezahlen(tastatur, zuZahlenderBetrag);
@@ -104,6 +112,7 @@ class Fahrkartenautomat {
 			double zwischensumme = ticketPreis * ticketAnzahl;
 			ticketPreis = 0.0f;
 			ticketNummer = invalidNum;
+			selectedAny = true;
 
 			// preis für alle Tickets berechnen
 			zuZahlenderBetrag += zwischensumme;
